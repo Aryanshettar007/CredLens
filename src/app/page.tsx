@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AuditSection } from "@/components/spend-form/AuditSection";
 import {
   CursorLogo,
   CopilotLogo,
@@ -242,24 +243,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== AUDIT SECTION PLACEHOLDER ===== */}
-      <section id="audit" className="border-t border-border bg-muted/30 py-20 sm:py-28">
-        <div className="mx-auto max-w-4xl px-4 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Audit Your AI Spend
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            The spend input form is coming in Day 2. Check back tomorrow!
-          </p>
-          <div className="mt-8 rounded-2xl border-2 border-dashed border-border bg-card p-12 text-muted-foreground">
-            <svg className="h-16 w-16 mx-auto mb-4 text-muted-foreground/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-              <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-            </svg>
-            <p className="text-lg font-medium">Spend Input Form</p>
-            <p className="text-sm mt-1">Support for Cursor, Copilot, Claude, ChatGPT, APIs, Gemini & Windsurf</p>
-          </div>
-        </div>
-      </section>
+      {/* ===== AUDIT SECTION ===== */}
+      <AuditSection />
 
       {/* ===== FAQ ===== */}
       <section id="faq" className="py-20 sm:py-28">
