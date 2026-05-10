@@ -35,7 +35,7 @@
 
 ---
 
-## Day 2 & 3 — 2026-05-08
+## Day 2 — 2026-05-08
 
 **Hours worked:**4
 
@@ -85,3 +85,41 @@
 - Build the email capture (Lead Capture) flow to guard the results.
 - Set up MongoDB and Mongoose schemas to persist audit runs and captured leads.
 - Create the final `/share/[id]` public route for sharable audits.
+
+---
+
+## Day 3 — 2026-05-09
+
+**Hours worked:** 0
+
+**What I did:**
+- Took the day off from CredLens to attend the Nasiko Buildathon at the Microsoft Office.
+- **Won Top 10 place!** Built a system for caching to reduce redundant queries and solve model overload in orchestration.
+
+---
+
+## Day 4 — 2026-05-10
+
+**Hours worked:** 5
+
+**What I did:**
+- Integrated **MongoDB Atlas** with Mongoose models (`Audit` and `Lead`) to persist user spend configurations and audit results securely.
+- Turned the audit engine into a lead generation machine by building a "Gated UI" on the Results page. It teases the high-level savings but blurs the tool-by-tool breakdown until the user enters their email.
+- Built a custom honeypot field into the `LeadCaptureForm` to block spam bots from polluting the database.
+- Integrated the **Resend API** to email users a link to their saved audit. Used my personal portfolio domain (`aryanshettar.tech`) to send the emails securely!
+- Built the public `/share/[id]` SSR route in Next.js, allowing users to revisit their specific audit using the unique `shareId`.
+- Added dynamic **OpenGraph (`og:title`) metadata** to the share page so that when users drop their link in Slack or Twitter, it generates a beautiful preview card showing their exact savings (e.g., "I found $14,000/yr in AI savings using CredLens!").
+- Created `ARCHITECTURE.md` to document the entire system's design, state management, and database schema.
+- Prepared the app for Vercel deployment by ensuring the Turbopack build complies strictly with TypeScript/ESLint rules.
+
+**What I learned:**
+- Using Resend with a custom portfolio domain (`aryanshettar.tech`). I learned how to set up the DNS records (TXT/MX) on my domain registrar to verify domain ownership and improve email deliverability.
+- Next.js 15 `generateMetadata()` is incredibly powerful for server-side OpenGraph tag generation based on dynamic database fetching.
+
+**Blockers / what I'm stuck on:**
+- None.
+
+**Plan for tomorrow:**
+- Finalize the README.md and business documentation (GTM strategy, User Economics).
+- Add final testing.
+- Push everything to GitHub and officially deploy to Vercel!
