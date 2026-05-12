@@ -52,11 +52,11 @@ export async function POST(request: NextRequest) {
     await sendAuditEmail(email, typedAudit);
 
     return NextResponse.json({ success: true, leadId: newLead._id });
-  } catch (error) {
+  } catch (error: any) {
     console.error("[Leads API] Error saving lead:", error);
     return NextResponse.json(
-      { error: "Failed to save lead." },
+      { error: "Failed to save lead.", details: error.message },
       { status: 500 }
     );
   }
-}
+} 
