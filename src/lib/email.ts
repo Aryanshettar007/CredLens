@@ -27,41 +27,35 @@ export async function sendAuditEmail(
       subject: `Your CredLens AI Audit is ready (Save $${audit.totalAnnualSavings.toLocaleString()}/yr)`,
 
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; line-height: 1.6; color: #111;">
-
-          <p>Hi,</p>
-
-          <p>
-            We finished analyzing your AI tool usage and generated your CredLens audit report.
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #111; background: #fff; padding: 8px 0;">
+          <h2 style="font-size: 20px; margin: 0 0 8px;">Your CredLens audit is ready</h2>
+          <p style="margin: 0 0 16px; color: #444;">
+            Thanks for running an audit. Here is a quick summary based on your inputs:
           </p>
 
-          <p>
-            Based on the current inputs, we identified approximately 
-            <strong>$${audit.totalAnnualSavings.toLocaleString()}</strong> 
-            in potential annual savings opportunities.
-          </p>
-
-          <div style="background:#f5f5f5; padding:16px; border-radius:8px; margin:20px 0;">
-            <p><strong>Current spend:</strong> $${audit.totalCurrentMonthlySpend.toLocaleString()}/month</p>
-            <p><strong>Optimized spend:</strong> $${audit.totalRecommendedMonthlySpend.toLocaleString()}/month</p>
-            <p><strong>Estimated monthly savings:</strong> $${audit.totalMonthlySavings.toLocaleString()}/month</p>
+          <div style="background: #f6f6f7; border: 1px solid #eee; border-radius: 10px; padding: 16px; margin: 16px 0;">
+            <p style="margin: 0 0 6px;"><strong>Current spend:</strong> $${audit.totalCurrentMonthlySpend.toLocaleString()}/month</p>
+            <p style="margin: 0 0 6px;"><strong>Optimized spend:</strong> $${audit.totalRecommendedMonthlySpend.toLocaleString()}/month</p>
+            <p style="margin: 0;"><strong>Estimated monthly savings:</strong> $${audit.totalMonthlySavings.toLocaleString()}/month</p>
           </div>
 
-          <p>
-            You can access the complete breakdown and recommendations here:
+          <p style="margin: 16px 0;">
+            Estimated annual savings: <strong>$${audit.totalAnnualSavings.toLocaleString()}</strong>
           </p>
 
-          <p>
-            <a href="${shareUrl}">View your audit report</a>
+          <p style="margin: 16px 0;">
+            <a href="${shareUrl}" style="display: inline-block; background: #111; color: #fff; text-decoration: none; padding: 12px 18px; border-radius: 8px; font-weight: 600;">
+              View full report
+            </a>
           </p>
 
-          <br/>
-
-          <p>
-            — Aryan<br/>
-            CredLens
+          <p style="margin: 24px 0 0; color: #666; font-size: 13px;">
+            If you have questions, just reply to this email.
           </p>
 
+          <p style="margin: 12px 0 0; color: #111; font-size: 13px;">
+            — Aryan, CredLens
+          </p>
         </div>
       `,
     });

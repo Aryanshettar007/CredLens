@@ -276,14 +276,16 @@ export default function ResultsPage() {
             </Link>
             <button
               onClick={() => {
+                const shareUrl = `${window.location.origin}/share/${auditResult.shareId}`;
+
                 if (navigator.share) {
                   navigator.share({
                     title: "My CredLens AI Spend Audit",
                     text: `I found $${auditResult.totalAnnualSavings.toLocaleString()}/yr in AI tool savings with CredLens!`,
-                    url: window.location.href,
+                    url: shareUrl,
                   });
                 } else {
-                  navigator.clipboard.writeText(window.location.href);
+                  navigator.clipboard.writeText(shareUrl);
                   alert("Link copied to clipboard!");
                 }
               }}
