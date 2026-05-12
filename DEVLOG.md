@@ -123,3 +123,47 @@
 - Finalize the README.md and business documentation (GTM strategy, User Economics).
 - Add final testing.
 - Push everything to GitHub and officially deploy to Vercel!
+
+---
+
+## Day 5 — 2026-05-11 (Pushed on 2026-05-12)
+
+**Hours worked:** 4
+
+**What I did:**
+- Set up **Vitest** as our testing framework. It's incredibly fast and works out-of-the-box with TypeScript and Next.js 15.
+- Wrote 5 comprehensive unit tests for the core `audit-engine.ts` logic, verifying that the math for seat optimization, plan downgrades, cross-vendor switching, and Credex bulk discounts works perfectly.
+- Created a **GitHub Actions CI Pipeline** (`.github/workflows/ci.yml`) that automatically runs linting, unit tests, and the Next.js production build on every push to the `main` branch.
+- Wrote the final documentation: `README.md` and `TESTS.md`.
+- Executed the final production deployment on Vercel.
+- *Note: I completely forgot to commit and push this work yesterday (11/5), so I am pushing both Day 5 and Day 6 commits together today on 12/5!*
+
+**What I learned:**
+- Vitest's API is almost completely identical to Jest, but because it's built on Vite, it processes TypeScript files without needing a complicated `ts-jest` or Babel setup. It was a breeze to integrate.
+
+**Blockers / what I'm stuck on:**
+- None! The technical implementation of CredLens is complete.
+
+---
+
+## Day 6 — 2026-05-12
+
+**Hours worked:** 4
+
+**What I did:**
+- Developed the complete business and launch strategy for CredLens, creating a suite of 6 strategic documents:
+  - **GTM.md**: Outlined the founder-led and social-viral acquisition strategy.
+  - **ECONOMICS.md**: Modeled the unit economics of the lead-gen engine vs. the Credex wholesale marketplace.
+  - **USER_INTERVIEWS.md**: Synthesized market research from CTOs and Founders regarding "Shadow IT" pain points.
+  - **LANDING_COPY.md**: Drafted A/B testing variations for the hero section.
+  - **METRICS.md**: Defined the KPIs for audit completion, lead capture, and marketplace conversion.
+  - **REFLECTION.md**: Documented technical wins, project challenges, and the future product roadmap.
+- Ran a final production build (`npm run build`) to verify 100% deployment readiness.
+- Finalized all documentation (README, TESTS, ARCHITECTURE).
+
+**What I learned:**
+- Building a successful product requires a balance of deterministic engineering (the rules engine) and conversational AI (Gemini summaries). One provides the trust, the other provides the "wow" factor.
+- "Shadow IT" is a much stronger marketing hook for B2B than just "saving money" — it touches on a founder's fear of loss of control.
+
+**Blockers / what I'm stuck on:**
+- None! Project is 100% ready for launch.

@@ -1,68 +1,46 @@
-# CredLens — AI Spend Audit Tool
+# CredLens 🔍
 
-A free web app that audits startup AI tool spending, surfaces savings, and generates leads for Credex.
+CredLens is a powerful AI spend audit tool built for startups and enterprise teams. It analyzes a company's software stack (like ChatGPT, GitHub Copilot, Cursor, etc.) and instantly finds actionable savings through seat optimization, plan downgrades, cross-vendor switching, and exclusive volume discounts.
 
-## Overview
-
-CredLens helps startups understand if they are overpaying for AI tools (like ChatGPT, Claude, GitHub Copilot, Cursor, etc.). Users input their current stack, plan tiers, and seat counts, and the tool's audit engine analyzes the data against official vendor pricing to recommend cheaper plans, better alternatives, and Credex discounts.
+## Core Features
+- **Dynamic Rules Engine**: A hardcoded, highly tested algorithm that maps usage patterns to optimal pricing tiers across 8+ major AI vendors.
+- **AI-Powered "CFO" Summaries**: Integrates with the Google Gemini (`gemini-3-flash-preview`) API to read the mathematical audit results and generate a conversational, actionable executive summary.
+- **Lead Generation Pipeline**: Audits are "gated" behind a beautiful blur UI. Users must enter an email (verified through a honeypot anti-spam check) to unlock the full breakdown.
+- **Transactional Emails**: Integrates with the Resend API to securely email users a permalink to their audit.
+- **Sharable SSR Links**: Unique, persistent URLs (`/share/[id]`) loaded server-side from MongoDB, complete with dynamic OpenGraph tags for rich social media previews.
 
 ## Tech Stack
-
-- **Framework:** Next.js 15 (App Router)
+- **Framework:** Next.js 15 (App Router, Turbopack)
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS + custom design system (Google/Credex inspired)
-- **Database:** MongoDB Atlas (Mongoose)
-- **AI Integration:** Google Gemini API (for personalized summaries)
-- **Emails:** Resend
-- **Deployment:** Vercel
+- **Styling:** Tailwind CSS v4 (Zero-config, vanilla aesthetics)
+- **Database:** MongoDB Atlas (Mongoose ORM)
+- **Email Delivery:** Resend API
+- **Testing:** Vitest
+- **CI/CD:** GitHub Actions & Vercel
 
-## Local Development Setup
+## Getting Started
 
-1. **Clone the repository**
-2. **Install dependencies:**
+1. **Clone the repository and install dependencies:**
    ```bash
    npm install
    ```
-3. **Set up environment variables:**
-   Copy `.env.example` to `.env.local` and fill in the required keys:
+
+2. **Configure Environment Variables:**
+   Create a `.env.local` file in the root directory:
    ```env
-   MONGODB_URI=your_mongodb_connection_string
-   GEMINI_API_KEY=your_gemini_api_key
-   RESEND_API_KEY=your_resend_api_key
-   NEXT_PUBLIC_BASE_URL=http://localhost:3000
+   MONGODB_URI="your_mongodb_connection_string"
+   GEMINI_API_KEY="your_google_ai_key"
+   RESEND_API_KEY="your_resend_api_key"
    ```
-4. **Run the development server:**
+
+3. **Run the development server:**
    ```bash
    npm run dev
    ```
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+   Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-## Project Structure
-
-- `src/app/`: Next.js App Router pages and API routes
-- `src/components/`: Reusable React components (Layout, UI, Icons)
-- `src/lib/`: Core logic (Audit Engine, DB connection, API clients)
-- `src/types/`: TypeScript interfaces and type definitions
-- `src/models/`: Mongoose schemas
-- `public/`: Static assets (Logos, OG Images)
-
-## Assignment Documentation
-
-This project fulfills the requirements of the Credex Web Development Intern Assignment. Please refer to the following required documentation files:
-
-- [`ARCHITECTURE.md`](ARCHITECTURE.md): Technical decisions, data flow, and stack justification
-- [`DEVLOG.md`](DEVLOG.md): Daily progress log across the 7-day build
-- [`TESTS.md`](TESTS.md): Test suite documentation
-- [`PRICING_DATA.md`](PRICING_DATA.md): Verifiable pricing sources for the audit engine
-- [`PROMPTS.md`](PROMPTS.md): LLM prompt engineering strategies
-- [`GTM.md`](GTM.md): Go-to-market strategy
-- [`ECONOMICS.md`](ECONOMICS.md): Business model and unit economics
-- [`USER_INTERVIEWS.md`](USER_INTERVIEWS.md): Insights from user interviews
-- [`LANDING_COPY.md`](LANDING_COPY.md): Landing page copywriting strategy
-- [`METRICS.md`](METRICS.md): Key performance indicators for the product
-- [`REFLECTION.md`](REFLECTION.md): Personal reflection on the assignment
-
-## License
-
-This project is created for the Credex Web Development Intern Assignment.
-
+## Documentation
+- [ARCHITECTURE.md](./ARCHITECTURE.md): Detailed explanation of data flow, state management, and the Gemini pipeline.
+- [PROMPTS.md](./PROMPTS.md): The exact system prompts engineered for the Gemini API.
+- [TESTS.md](./TESTS.md): Explanation of the Vitest framework and unit test scenarios.
+- [DEVLOG.md](./DEVLOG.md): Daily development log chronicling the build process and technical decisions.
