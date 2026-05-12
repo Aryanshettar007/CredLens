@@ -1,5 +1,10 @@
 import mongoose from "mongoose";
 
+type MongooseCache = {
+  conn: typeof mongoose | null;
+  promise: Promise<typeof mongoose> | null;
+};
+
 const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
@@ -13,11 +18,13 @@ if (!MONGODB_URI) {
  * in development. This prevents connections growing exponentially
  * during API Route usage.
  */
-let cached = (global as any).mongoose;
+const globalForMongoose = global as typeof globalThis & {
+  mongoose?: MongooseCache;
+};
 
-if (!cached) {
-  cached = (global as any).mongoose = { conn: null, promise: null };
-}
+const cached =
+  globalForMongoose.mongoose ??
+  (globalForMongoose.mongoose = { conn: null, promise: null });
 
 async function connectToDatabase() {
   if (cached.conn) {

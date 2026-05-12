@@ -5,7 +5,7 @@ import type {
   AuditResult,
   RecommendationType,
 } from "@/types";
-import { TOOL_DEFINITIONS, getToolDef, getPlan } from "./pricing-data";
+import { getToolDef, getPlan } from "./pricing-data";
 import { nanoid } from "nanoid";
 
 /**

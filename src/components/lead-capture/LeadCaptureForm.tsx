@@ -134,7 +134,7 @@ export function LeadCaptureForm({ auditResult, onSuccess }: LeadCaptureFormProps
         </button>
         
         <p className="text-center text-xs text-muted-foreground mt-4">
-          We'll also email you a secure link to view these results anytime.
+          We&apos;ll also email you a secure link to view these results anytime.
         </p>
       </form>
     </div>

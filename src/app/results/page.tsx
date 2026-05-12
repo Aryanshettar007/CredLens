@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import type { AuditResult, ToolAuditResult } from "@/types";
+import type { AuditResult } from "@/types";
 import { LeadCaptureForm } from "@/components/lead-capture/LeadCaptureForm";
 import { ToolResultCard } from "@/components/results/ToolResultCard";
 
@@ -42,6 +42,7 @@ export default function ResultsPage() {
   const [loading, setLoading] = useState(true);
   const [isUnlocked, setIsUnlocked] = useState(false);
 
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     try {
       // Read full audit result from API (set by AuditSection)
@@ -60,6 +61,7 @@ export default function ResultsPage() {
     }
     setLoading(false);
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   const handleUnlockSuccess = () => {
     sessionStorage.setItem("credlens-unlocked", "true");

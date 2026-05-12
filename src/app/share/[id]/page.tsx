@@ -4,6 +4,7 @@ import Link from "next/link";
 import connectToDatabase from "@/lib/mongoose";
 import { Audit } from "@/models/Audit";
 import { ToolResultCard } from "@/components/results/ToolResultCard";
+import type { AuditResult } from "@/types";
 
 // ── Next.js 15 App Router dynamic route config ──
 interface PageProps {
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { id } = await params;
   
   await connectToDatabase();
-  const auditDoc = await Audit.findOne({ shareId: id }).lean();
+  const auditDoc = await Audit.findOne({ shareId: id }).lean<AuditResult | null>();
 
   if (!auditDoc) {
     return {
@@ -58,7 +59,7 @@ export default async function SharePage({ params }: PageProps) {
 
   // 1. Fetch Audit from MongoDB
   await connectToDatabase();
-  const auditDoc = await Audit.findOne({ shareId: id }).lean();
+  const auditDoc = await Audit.findOne({ shareId: id }).lean<AuditResult | null>();
 
   if (!auditDoc) {
     notFound();
@@ -66,13 +67,13 @@ export default async function SharePage({ params }: PageProps) {
 
   // Next.js returns MongoDB documents with ObjectIds that can't be passed to Client Components directly,
   // but we are rendering everything Server-Side here anyway.
-  const audit = auditDoc as any;
+  const audit = auditDoc;
 
   const toolsWithSavings = audit.toolResults.filter(
-    (r: any) => r.monthlySavings > 0
+    (result) => result.monthlySavings > 0
   );
   const toolsOptimal = audit.toolResults.filter(
-    (r: any) => r.monthlySavings === 0
+    (result) => result.monthlySavings === 0
   );
 
   return (
@@ -170,7 +171,7 @@ export default async function SharePage({ params }: PageProps) {
             Tools with savings opportunities
           </h2>
           <div className="space-y-3">
-            {toolsWithSavings.map((result: any, index: number) => (
+            {toolsWithSavings.map((result, index) => (
               <ToolResultCard key={`${result.toolId}-${index}`} result={result} />
             ))}
           </div>
@@ -186,7 +187,7 @@ export default async function SharePage({ params }: PageProps) {
             Tools already optimized
           </h2>
           <div className="space-y-3">
-            {toolsOptimal.map((result: any, index: number) => (
+            {toolsOptimal.map((result, index) => (
               <ToolResultCard key={`${result.toolId}-${index}`} result={result} />
             ))}
           </div>

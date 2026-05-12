@@ -24,6 +24,7 @@ export function SpendForm({ onSubmit }: SpendFormProps) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   // ── Load from localStorage on mount ──
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -37,6 +38,7 @@ export function SpendForm({ onSubmit }: SpendFormProps) {
     }
     setIsLoaded(true);
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // ── Persist to localStorage on change ──
   useEffect(() => {
