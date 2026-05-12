@@ -25,30 +25,43 @@ export async function sendAuditEmail(
       // In production (with a verified domain), we send to the user's entered email:
       to: toEmail, 
       subject: `Your CredLens AI Audit is ready (Save $${audit.totalAnnualSavings.toLocaleString()}/yr)`,
+
       html: `
-        <div style="font-family: sans-serif; max-w: 600px; margin: 0 auto; color: #1a1a1a;">
-          <h2 style="color: #000;">Your AI Spend Audit Results</h2>
-          <p>Hi there,</p>
-          <p>Thanks for using CredLens! We analyzed your team's AI tool usage and found <strong>$${audit.totalAnnualSavings.toLocaleString()} in potential annual savings</strong>.</p>
-          
-          <div style="background-color: #f4f4f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="margin-top: 0; font-size: 16px; color: #52525b; text-transform: uppercase;">Audit Summary</h3>
-            <p style="margin: 5px 0;"><strong>Current Spend:</strong> $${audit.totalCurrentMonthlySpend.toLocaleString()}/mo</p>
-            <p style="margin: 5px 0;"><strong>Optimized Spend:</strong> $${audit.totalRecommendedMonthlySpend.toLocaleString()}/mo</p>
-            <p style="margin: 5px 0; color: #16a34a;"><strong>Monthly Savings:</strong> $${audit.totalMonthlySavings.toLocaleString()}/mo</p>
-          </div>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; line-height: 1.6; color: #111;">
 
-          <p>You can view your detailed tool-by-tool breakdown and Gemini AI recommendations anytime at your persistent link below:</p>
-          
-          <div style="text-align: center; margin: 30px 0;">
-            <a href="${shareUrl}" style="background-color: #000; color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; display: inline-block;">
-              View Full Report
-            </a>
-          </div>
+          <p>Hi,</p>
 
-          <p style="font-size: 12px; color: #71717a;">
-            (Note: This email was sent to aryanshettar007@gmail.com because the app is using the Resend sandbox environment. The user entered: ${toEmail})
+          <p>
+            We finished analyzing your AI tool usage and generated your CredLens audit report.
           </p>
+
+          <p>
+            Based on the current inputs, we identified approximately 
+            <strong>$${audit.totalAnnualSavings.toLocaleString()}</strong> 
+            in potential annual savings opportunities.
+          </p>
+
+          <div style="background:#f5f5f5; padding:16px; border-radius:8px; margin:20px 0;">
+            <p><strong>Current spend:</strong> $${audit.totalCurrentMonthlySpend.toLocaleString()}/month</p>
+            <p><strong>Optimized spend:</strong> $${audit.totalRecommendedMonthlySpend.toLocaleString()}/month</p>
+            <p><strong>Estimated monthly savings:</strong> $${audit.totalMonthlySavings.toLocaleString()}/month</p>
+          </div>
+
+          <p>
+            You can access the complete breakdown and recommendations here:
+          </p>
+
+          <p>
+            <a href="${shareUrl}">View your audit report</a>
+          </p>
+
+          <br/>
+
+          <p>
+            — Aryan<br/>
+            CredLens
+          </p>
+
         </div>
       `,
     });
