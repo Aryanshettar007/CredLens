@@ -31,3 +31,8 @@ jobs:
 
       - name: Build Next.js App
         run: npm run build
+        env:
+          MONGODB_URI: ${{ vars.MONGODB_URI }}
+          RESEND_API_KEY: ${{ vars.RESEND_API_KEY }}
+          GEMINI_API_KEY: ${{ vars.GEMINI_API_KEY }}
+          NEXT_PUBLIC_BASE_URL: ${{ vars.NEXT_PUBLIC_BASE_URL }}
