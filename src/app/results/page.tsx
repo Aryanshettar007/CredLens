@@ -227,29 +227,25 @@ export default function ResultsPage() {
       </div>
 
       {/* ── Credex CTA (only for significant savings) ── */}
-      {auditResult.totalMonthlySavings >= 100 && (
+      {auditResult.totalMonthlySavings >= 500 && (
         <div className="mt-10 rounded-2xl border-2 border-cl-green/30 bg-cl-green/5 p-6 sm:p-8 text-center animate-fade-in-up animate-delay-300">
           <p className="text-sm font-semibold text-cl-green uppercase tracking-wider mb-2">
-            Unlock even more savings
+            High savings detected
           </p>
           <h3 className="text-xl font-bold text-foreground sm:text-2xl">
-            Save up to{" "}
-            <span className="text-cl-green">
-              ${Math.round(auditResult.totalAnnualSavings * 0.6).toLocaleString()}
-            </span>{" "}
-            more per year with Credex
+            Book a Credex consultation to capture these savings
           </h3>
           <p className="mt-2 text-sm text-muted-foreground max-w-lg mx-auto">
-            Credex sells discounted AI credits from companies that overforecast.
-            Get the same tools at lower prices — verified and guaranteed.
+            Credex helps teams secure discounted AI credits and renegotiate plans.
+            If you are saving over $500/mo, a short consult can unlock even more value.
           </p>
           <a
-            href="https://credex.rocks"
+            href="mailto:hello@credex.rocks?subject=Credex%20Consultation%20Request"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-5 inline-flex h-11 items-center rounded-full bg-cl-green px-6 text-sm font-semibold text-white transition-all hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]"
           >
-            Explore Credex Credits →
+            Book a Credex consultation →
           </a>
         </div>
       )}

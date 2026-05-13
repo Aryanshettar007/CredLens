@@ -32,3 +32,19 @@ We will A/B test 3 different "Hooks" for the CredLens hero section to maximize a
 - **Traffic Split:** 33/33/33 via Vercel Edge Config.
 - **Primary Metric:** Click-through rate (CTR) on the "Start Audit" button.
 - **Secondary Metric:** Lead capture rate (Email entry) on the results page.
+
+---
+
+## Social Proof Block (Mocked)
+- **1,200+ audits run this month** (mocked)
+- **$2.4M in annual savings found** (mocked)
+- **Used by 40+ startup teams** (mocked)
+
+---
+
+## FAQ (5 Q&As)
+1. **Is this actually free?** Yes. The audit is free, no login required. We only ask for an email after you see your savings summary.
+2. **How do you calculate savings?** We use a rules-based engine tied to vendor pricing pages. Every number is traceable to a public pricing URL.
+3. **Do you see my company data?** No. The public share link strips identifying data. Only tool names and savings are shown.
+4. **What if I already have an optimized stack?** We will tell you that honestly and offer to notify you if pricing changes.
+5. **What is Credex?** Credex helps teams buy AI credits at discounted rates through a consultation and managed procurement.

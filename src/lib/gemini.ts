@@ -1,17 +1,45 @@
 import { GoogleGenAI } from "@google/genai";
 import type { AuditResult } from "@/types";
 
+function buildFallbackSummary(audit: AuditResult): string {
+  let topOpportunity: AuditResult["toolResults"][number] | null = null;
+
+  for (const result of audit.toolResults) {
+    if (!topOpportunity || result.monthlySavings > topOpportunity.monthlySavings) {
+      topOpportunity = result;
+    }
+  }
+
+  const hasSavings = audit.totalMonthlySavings > 0;
+  const savingsLine = hasSavings
+    ? `You have real savings potential across your stack, with about $${audit.totalMonthlySavings.toLocaleString()}/mo ($${audit.totalAnnualSavings.toLocaleString()}/yr) available if you follow the recommendations.`
+    : "Your stack is already well optimized and we did not find meaningful savings at your current usage levels.";
+
+  const opportunityLine =
+    topOpportunity && topOpportunity.monthlySavings > 0
+      ? `The biggest quick win is ${topOpportunity.recommendedAction} for ${topOpportunity.toolName}, which saves roughly $${topOpportunity.monthlySavings.toLocaleString()}/mo.`
+      : "No single tool stands out as a major overpayment, which is a strong signal that your current plans fit your usage.";
+
+  const closingLine =
+    audit.totalMonthlySavings >= 200
+      ? "If you want to capture even more savings, Credex can help you access discounted AI credits through a short consultation."
+      : "If your team size or usage changes, re-run the audit to catch new optimization opportunities as pricing evolves.";
+
+  return `${savingsLine}\n\n${opportunityLine}\n\n${closingLine}`;
+}
+
 /**
  * Generate a personalized AI summary of the audit results using Gemini.
  * Falls back gracefully if the API key is missing or the call fails.
  */
 export async function generateAuditSummary(
   audit: AuditResult
-): Promise<string | null> {
+): Promise<string> {
+  const fallback = buildFallbackSummary(audit);
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey || apiKey === "your-gemini-api-key") {
     console.warn("[Gemini] No API key configured — skipping AI summary.");
-    return null;
+    return fallback;
   }
 
   try {
@@ -54,9 +82,9 @@ Rules:
       model: "gemini-3-flash-preview",
       contents: prompt,
     });
-    return response.text || null;
+    return response.text || fallback;
   } catch (error) {
     console.error("[Gemini] Failed to generate summary:", error);
-    return null;
+    return fallback;
   }
 }

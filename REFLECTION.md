@@ -1,29 +1,24 @@
 # Final Reflection: Building CredLens
 
-Building CredLens in 7 days was an exercise in balancing "B2B Professionalism" with "Lead-Gen Conversion Tactics."
+## 1. Hardest bug and how I debugged it
+The hardest bug was a build failure that only appeared during `next build`. The error said the `MONGODB_URI` env variable was missing, but I had it set locally. My first hypothesis was that Next was not loading `.env` during the build, so I tried `.env.local`, reloaded the shell, and even echoed the variable before running the build. The error persisted. Next, I suspected the build was executing server code too early, so I searched for any top-level MongoDB connection calls and found that `src/lib/mongoose.ts` threw an error at import time if `MONGODB_URI` was missing. That meant the module was crashing even if the API route was never called. I confirmed this by adding a temporary console log around the import and observing it being evaluated while Next collected data for `/api/leads`. The fix was to move the env validation inside `connectToDatabase()` so it only runs when a request actually needs MongoDB. After that change, the build passed and the API still errors correctly at runtime if the env is missing. The key was reframing the bug from “env is missing” to “import side effect is crashing build.”
 
-## Technical Decisions & Rationale
+## 2. A decision I reversed mid-week
+I initially planned to hard-gate the entire results page until a user entered an email. It felt like the strongest lead capture approach, and I assumed users would comply if the UI looked polished. After reading the requirements more carefully and considering how a skeptical CTO would react, I realized this would feel like a bait-and-switch. I reversed the decision and implemented a soft gate instead: show the total savings and summary cards immediately, blur only the detailed tool-by-tool breakdown, and then ask for email. That change aligned with the requirement “email is captured after value is shown, never before.” It also made the product feel more trustworthy. In practice, it required more UI work (overlay blur, separate components, and deliberate content hierarchy), but the conversion trade-off felt justified because it builds credibility. This decision also influenced the copy in the lead capture form, which now feels like “unlock the detailed report” rather than “pay a toll.”
 
-### 1. The Rules Engine vs. Pure AI
-We decided to build a hardcoded TypeScript rules engine for the actual math (`src/lib/audit-engine.ts`) instead of letting an LLM calculate the savings. 
-- **Reason:** Accuracy. Users will not trust a financial tool that "hallucinates" a $20 discount. AI is used solely for the "human" summary, while the math remains deterministic.
+## 3. What I would build in week 2
+Week 2 would focus on making the audit more automated and increasing the conversion rate from “audit completed” to “Credex consultation.” First, I would build a lightweight browser extension that detects AI tool usage by reading logged-in domains (Cursor, OpenAI, Anthropic) and auto-fills the audit form. That reduces friction and gives CredLens a “magic” moment. Second, I would add a PDF export option so teams can forward the report internally, which increases internal advocacy. Third, I would implement a benchmarking mode: “You spend $X per dev; teams your size average $Y.” That makes the audit more sticky and creates a competitive narrative. On the sales side, I would add a scheduling flow for consultation booking (Calendly or a minimal in-app slot picker) and experiment with a pricing claim: “Credex can usually capture 10-25% more savings.” Finally, I would set up instrumentation for cohort analysis so I can compare conversion rates across different savings tiers and tune the CTA positioning for high-savings audits.
 
-### 2. Next.js 15 & Turbopack
-Using the latest Next.js 15 features like `generateMetadata` for dynamic OpenGraph tags made the product "viral-ready" with very little code. The `/share/[id]` routes feel premium because of the server-side rendering and instant social previews.
+## 4. How I used AI tools (and what I did not trust them with)
+I used AI tools for fast iteration on boilerplate and copy, especially for documentation drafts, initial component scaffolding, and the first version of the Gemini prompt. I also used AI to sanity-check small UI refactors and to draft concise error-handling patterns. I did not trust AI with the audit math or pricing logic. For the rules engine, I verified every rule manually and cross-checked pricing with official URLs because the numbers must be defensible. One specific time AI was wrong: it suggested using `next lint .` in CI, assuming the Next CLI exposed a `lint` command. In the current Next.js version, that subcommand does not exist in the CLI, so the workflow treated “lint” as a directory and failed. I caught it by reading the compiled Next CLI file in `node_modules` and confirmed the missing command. The fix was to run `eslint .` directly. That moment reinforced the rule: AI can accelerate, but anything related to build tooling or pricing must be verified against reality.
 
-### 3. The "Gate" UI
-The decision to blur the results was a product risk. However, by showing the **Total Savings** first and blurring only the *how-to-fix-it* part, we provide enough value (the "What") to justify the "price" of an email address (the "How").
+## 5. Self-rating (1-10) with reasons
+**Discipline: 8/10.** I kept a daily log, enforced tests, and shipped features in a steady cadence, but I did have one day where I pushed multiple days of work together rather than committing the same day.
 
-## Challenges Overcome
+**Code quality: 7/10.** The codebase is structured and typed, and I added tests for the audit engine. However, I still have areas where typing can be improved and some UI logic is more imperative than I would like.
 
-- **Shadow IT Detection:** Modeling the logic for when to suggest a "Team" plan vs. "Individual" plan required deep research into vendor pricing (Cursor, OpenAI, etc.), which we documented in `PRICING_DATA.md`.
-- **Email Deliverability:** Setting up Resend with a custom domain (`aryanshettar.tech`) and DNS records was a crucial step to ensure the lead-gen emails actually hit the inbox, not the spam folder.
+**Design sense: 8/10.** The results page and share flow feel polished, and the soft gate balance was a good UX call. I still want to refine typography hierarchy and some spacing details.
 
-## Future Roadmap
+**Problem solving: 8/10.** I handled build, lint, and deployment issues quickly and traced issues to their roots instead of patching symptoms. The MongoDB build bug was a good example of systematic debugging.
 
-1. **Browser Extension:** A Chrome extension that automatically detects which AI tools an employee is logged into, making the audit 100% automated.
-2. **Direct Purchase Integration:** Allowing users to click "Optimize" and have Credex automatically handle the plan downgrades and tool switches via API.
-3. **Multi-Currency Support:** Adapting the pricing data for EU/India markets where pricing tiers and tax implications (VAT/GST) vary.
-
-## Final Thought
-CredLens proves that a simple, focused utility can be a powerful engine for a complex B2B business model. By solving a small, annoying problem (AI spend bloat), we earn the trust to solve a big one (Infrastructure procurement).
+**Entrepreneurial thinking: 7/10.** I built the lead funnel, the share loop, and the high-savings CTA, but I want to improve the distribution narrative and add stronger proof points that turn audits into booked consultations.

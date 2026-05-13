@@ -1,7 +1,18 @@
 # CredLens 🔍
 
-CredLens is a powerful AI spend audit tool built for startups and enterprise teams. It analyzes a company's software stack (like ChatGPT, GitHub Copilot, Cursor, etc.) and instantly finds actionable savings through seat optimization, plan downgrades, cross-vendor switching, and exclusive volume discounts.
+CredLens is a free AI spend audit tool for startup CTOs and ops leaders who want a fast, defensible view of wasted AI spend. Users input their tool stack and get instant savings recommendations, then unlock a shareable report after viewing the top-line savings.
 
+Live demo: https://credlens.vercel.app/
+
+## Screenshots / Demo
+- Screenshot 1: Spend input form
+![Spend input form](./public/image.png)
+- Screenshot 2: Results summary and tool-by-tool breakdown
+![Results summary](./public/image2.png)
+- Screenshot 3: Share page
+![Share page](./public/image3.png)
+
+ 
 ## Core Features
 - **Dynamic Rules Engine**: A hardcoded, highly tested algorithm that maps usage patterns to optimal pricing tiers across 8+ major AI vendors.
 - **AI-Powered "CFO" Summaries**: Integrates with the Google Gemini (`gemini-3-flash-preview`) API to read the mathematical audit results and generate a conversational, actionable executive summary.
@@ -20,6 +31,7 @@ CredLens is a powerful AI spend audit tool built for startups and enterprise tea
 
 ## Getting Started
 
+### Quick Start (Local)
 1. **Clone the repository and install dependencies:**
    ```bash
    npm install
@@ -31,6 +43,7 @@ CredLens is a powerful AI spend audit tool built for startups and enterprise tea
    MONGODB_URI="your_mongodb_connection_string"
    GEMINI_API_KEY="your_google_ai_key"
    RESEND_API_KEY="your_resend_api_key"
+   NEXT_PUBLIC_BASE_URL="http://localhost:3000"
    ```
 
 3. **Run the development server:**
@@ -38,6 +51,30 @@ CredLens is a powerful AI spend audit tool built for startups and enterprise tea
    npm run dev
    ```
    Open [http://localhost:3000](http://localhost:3000) to view the application.
+
+### Tests & Lint
+```bash
+npm run lint
+npm run test
+```
+
+### Production Build
+```bash
+npm run build
+npm run start
+```
+
+### Deploy (Vercel)
+- Import the repo into Vercel
+- Set `MONGODB_URI`, `GEMINI_API_KEY`, `RESEND_API_KEY`, and `NEXT_PUBLIC_BASE_URL` in Environment Variables
+- Deploy
+
+## Decisions (Trade-offs)
+1. **Deterministic rules engine over AI for math**: AI only writes the summary; all savings are computed via code to keep numbers defensible.
+2. **Soft gate vs hard gate**: We show total savings before email capture to build trust while still gating the detailed breakdown.
+3. **Session storage for audit state**: Keeps URLs clean and avoids leaking private data in query params.
+4. **SSR share page with MongoDB**: Enables OpenGraph previews and persistent public links with minimal backend complexity.
+5. **Resend for transactional email**: Chosen for fast setup and high deliverability over heavier ESPs.
 
 ## Documentation
 - [ARCHITECTURE.md](./ARCHITECTURE.md): Detailed explanation of data flow, state management, and the Gemini pipeline.

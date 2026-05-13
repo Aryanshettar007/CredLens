@@ -1,33 +1,39 @@
 # Go-To-Market (GTM) Strategy: CredLens
 
-CredLens is the top-of-funnel lead magnet for **Credex**, a platform that helps startups save 10-25% on AI infrastructure and software credits by leveraging bulk purchasing power.
+CredLens is a top-of-funnel product for Credex. The GTM plan is designed to feel like a useful audit utility first, then convert high-savings users into Credex consultations second.
 
-## Target Audience
-- **Primary:** Early-to-growth stage startups (Seed to Series B) with 10-100 employees.
-- **Secondary:** Individual power-users and fractional CTOs who manage multiple tool stacks.
-- **Decision Maker:** CTO, Head of Engineering, or Ops Manager.
+## Target User (Specific)
+Our primary target is a Seed-to-Series B CTO or Head of Engineering at a 15-80 person startup who owns the engineering budget and is held accountable for software spend. This person is already paying for multiple AI tools (Cursor, Copilot, ChatGPT, Claude, Gemini) and is starting to feel the burn as the team scales. Secondary users include fractional CTOs and founders who manage 2-4 clients or side projects and need a quick, defensible answer to “are we overpaying?”
 
-## Acquisition Channels
+## Trigger Moments (What They Search or Scroll)
+The ideal trigger is when a finance lead or founder asks, “Why is AI spend up 30% this month?” These users search for phrases like:
+- “reduce AI tool spend”
+- “Cursor vs Copilot pricing”
+- “ChatGPT Team cost per seat”
+- “SaaS expense audit template”
+They also browse Twitter/X threads about “shadow IT” and Hacker News posts about AI tooling cost blowups.
 
-### 1. The "Shadow IT" Viral Campaign (Social)
-- **LinkedIn/Twitter:** Share "Anonymous Audit Results" showing how a 20-person startup saved $12,000/yr just by switching from Cursor Business to individual plans and optimizing seats.
-- **Hook:** "Your employees are expensing AI tools you don't even know about. Audit your stack for free in 60 seconds."
+## Where They Hang Out (Specific Places)
+- Hacker News (Show HN, Ask HN)
+- r/startups, r/SaaS, r/ExperiencedDevs
+- Indie Hackers community and Slack
+- YC Startup School forum
+- Lenny’s Newsletter community
+- SaaS Alliance / RevGenius / local founder Slack groups
 
-### 2. Founder Communities (Niche)
-- **YC/Techstars/IndieHackers:** Post a "Value-Add" thread offering free manual audits for the first 10 founders who comment. Use the results to build more case studies.
-- **Incentive:** Founders who complete an audit get a "Early Access" invite to the Credex credit marketplace.
+## First 100 Users in 30 Days (Zero Paid Budget)
+1. Publish 10 anonymized audit screenshots on X and LinkedIn that show clear savings and the shareable URL. Each post includes a short CTA: “Audit your stack in 60 seconds.”
+2. Run a “reply with your stack” thread and manually audit the first 20 responders. Send them their shareable report and ask for a quote. This yields 10-15 social proof snippets.
+3. Post a Show HN on Day 7 with a hard promise: “Free audit, no login, 60 seconds.”
+4. Ask 5 fractional CTOs in Slack groups to try it on a client and share the results (these users control multiple accounts, which accelerates volume).
+5. Offer a “Credex savings review” for any team that finds >$500/mo in savings, which drives consult bookings without paid ads.
 
-### 3. "Launch as a Tool" (Platform)
-- **Product Hunt:** Launch CredLens as a standalone free utility. 
-- **Goal:** Drive high-volume traffic to build the email list (leads) and populate the MongoDB database with real-world pricing trends.
+## Unfair Distribution Channel
+Credex already has access to pricing data and wholesale credit terms that the average founder can’t negotiate. CredLens can show a real, quantified delta between public pricing and potential Credex pricing. That delta is the hook: only Credex can unlock it at scale, so the audit naturally leads into a consultation.
 
-## Conversion Funnel
-1. **Awareness:** Social post or PH launch.
-2. **Engagement:** User runs a 1-minute audit on CredLens.
-3. **Capture:** User enters email to "Unlock Detailed Savings Breakdown."
-4. **Email Nurture:** User receives audit PDF + invite to buy AI credits at 20% off via Credex.
-5. **Revenue:** User moves their billing to the Credex platform.
-
-## Success Milestones
-- **Month 1:** 500 audits completed; 150 leads captured.
-- **Month 3:** 20 startups moved their $5k+/mo AI spend to Credex.
+## Week-1 Traction Targets (If This Works)
+- 300 unique visitors
+- 120 audit starts (40% start rate)
+- 90 audit completions (75% completion rate)
+- 25 email captures (28% lead capture)
+- 5 consultation requests (20% of high-savings leads)

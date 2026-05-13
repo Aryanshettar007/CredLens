@@ -32,3 +32,16 @@ Rules:
 - Do NOT use markdown headers or bullet points — just clean paragraphs
 - Do NOT hallucinate features or pricing — stick to what's in the data above
 ```
+
+## Why This Prompt Works
+This prompt forces the model to ground itself in the concrete audit data, while producing a short executive summary that fits the UI. The CFO-like tone keeps it professional without sounding robotic, and the requirement to start with the biggest insight prevents the model from re-listing the headline numbers the user already sees. The paragraph-only constraint avoids markdown rendering issues and keeps the summary visually consistent on the results page.
+
+The specific rules about when to mention Credex and when to congratulate the user ensure that low-savings audits do not feel salesy, while high-savings cases naturally lead to a next step. The tool-by-tool breakdown in the prompt gives the model context to highlight the single highest-impact action instead of spreading attention across all tools.
+
+## Iterations / What Didn't Work
+- Early versions used bullet points and headings, which made the UI look noisy and inconsistent with the rest of the page. We removed all markdown formatting to keep it clean.
+- A shorter prompt led to generic summaries that repeated the total savings without naming a single concrete action. We added the instruction to highlight one most impactful change.
+- A longer, more narrative prompt sometimes invented features or pricing. The explicit "do NOT hallucinate" rule and the structured data block reduced that.
+
+## Fallback Summary Template
+If the API fails or the key is missing, we return a templated summary built from the same audit data. The fallback is 2-3 short paragraphs that include the total savings, the single biggest opportunity (if any), and a final line tailored to high vs. low savings outcomes. This ensures the user always sees a summary and the UI remains consistent even without AI.
