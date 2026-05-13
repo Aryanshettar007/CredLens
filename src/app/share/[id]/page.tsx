@@ -14,6 +14,8 @@ interface PageProps {
 // ── OpenGraph Metadata Generation ──
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const ogImageUrl = new URL("/image3.png", baseUrl).toString();
   
   await connectToDatabase();
   const auditDoc = await Audit.findOne({ shareId: id }).lean<AuditResult | null>();
@@ -39,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "CredLens",
       images: [
         {
-          url: "/og-image.jpg", // Assuming we have a default OG image in public/
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: "CredLens AI Spend Audit",
@@ -50,6 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title,
       description,
+      images: [ogImageUrl],
     },
   };
 }

@@ -20,6 +20,7 @@ flowchart LR
 		Results[Results Page]
 		Results --> ShareCTA[Share Results Button]
 		Results --> LeadGate[Lead Capture Gate]
+		LeadGate --> Unlocked[AI Summary + Breakdown (Unlocked)]
 	end
 
 	subgraph Server
@@ -31,14 +32,11 @@ flowchart LR
 
 	AuditSubmit --> AuditAPI
 	AuditEngine --> Results
-	Gemini --> Results
+	Gemini --> Unlocked
 	LeadGate --> LeadsAPI
 	LeadsAPI --> Email[Resend Email]
 	ShareCTA --> SharePage
 ```
-
-Diagram (PNG backup):
-![CredLens system diagram](public/API%20Audit%20Submission%20Flow-2026-05-13-121640.png)
 
 ## 3. Core Components & Data Flow
 
@@ -47,8 +45,8 @@ Diagram (PNG backup):
 2. The client submits the form to `POST /api/audit`.
 3. The rules engine computes deterministic savings and returns the full audit.
 4. The server calls Gemini to generate a short summary; if Gemini fails, a templated summary is returned.
-5. The results page renders totals immediately and gates the detailed breakdown behind email capture.
-6. When a user submits the lead form, `POST /api/leads` persists the audit and lead in MongoDB and sends a Resend email with the `/share/:id` link.
+5. The results page renders totals immediately, but keeps the AI summary and detailed tool-by-tool breakdown behind the email gate.
+6. When a user submits the lead form, `POST /api/leads` persists the audit and lead in MongoDB, unlocks the AI summary + breakdown, and sends a Resend email with the `/share/:id` link.
 7. The share page (`/share/:id`) is SSR and reads the saved audit for link previews and public viewing.
 
 ### The Audit Engine (`src/lib/audit-engine.ts`)
@@ -68,7 +66,7 @@ To provide a personalized, "CFO-like" executive summary, the output of the Audit
 2. **Database (MongoDB)**: When the user unlocks their full report, the `AuditResult` is persisted to MongoDB (`Audit` model), and a `Lead` is created linking to that audit.
 
 ### The "Gate" & Lead Generation
-The `/results` page acts as a "teaser". It immediately displays the high-level savings metrics (Total Spend vs Total Savings) but overlays a blurred `LeadCaptureForm` over the detailed breakdown.
+The `/results` page acts as a "teaser". It immediately displays the high-level savings metrics (Total Spend vs Total Savings) but overlays a blurred `LeadCaptureForm` over the AI summary and detailed breakdown.
 - **Honeypot**: The form includes an invisible `website_url` input. Spam bots that fill this out are silently intercepted by the `POST /api/leads` route, preventing database pollution.
 - **Email Delivery**: Upon successful form submission, the Resend API fires a transactional email to the user with a secure link to their persistent report.
 

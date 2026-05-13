@@ -15,6 +15,10 @@ export const metadata: Metadata = {
   title: "CredLens — Free AI Spend Audit | Stop Overpaying for AI Tools",
   description:
     "Instantly audit your team's AI tool spending. Get a personalized report showing where you're overspending and how to save thousands annually. Free, no login required.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+  },
   keywords: [
     "AI spend audit",
     "AI tool pricing",
