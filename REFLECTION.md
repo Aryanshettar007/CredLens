@@ -15,10 +15,10 @@ I used AI tools for fast iteration on boilerplate and copy, especially for docum
 ## 5. Self-rating (1-10) with reasons
 **Discipline: 8/10.** I kept a daily log, enforced tests, and shipped features in a steady cadence, but I did have one day where I pushed multiple days of work together rather than committing the same day.
 
-**Code quality: 7/10.** The codebase is structured and typed, and I added tests for the audit engine. However, I still have areas where typing can be improved and some UI logic is more imperative than I would like.
+**Code quality: 8/10.** The codebase is structured and typed, and I added tests for the audit engine. However, I still have areas where typing can be improved and some UI logic is more imperative than I would like.
 
 **Design sense: 8/10.** The results page and share flow feel polished, and the soft gate balance was a good UX call. I still want to refine typography hierarchy and some spacing details.
 
-**Problem solving: 8/10.** I handled build, lint, and deployment issues quickly and traced issues to their roots instead of patching symptoms. The MongoDB build bug was a good example of systematic debugging.
+**Problem solving: 9/10.** I handled build, lint, and deployment issues quickly and traced issues to their roots instead of patching symptoms. The MongoDB build bug was a good example of systematic debugging.
 
-**Entrepreneurial thinking: 7/10.** I built the lead funnel, the share loop, and the high-savings CTA, but I want to improve the distribution narrative and add stronger proof points that turn audits into booked consultations.
+**Entrepreneurial thinking: 8/10.** I built the lead funnel, the share loop, and the high-savings CTA, but I want to improve the distribution narrative and add stronger proof points that turn audits into booked consultations.

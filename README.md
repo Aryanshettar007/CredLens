@@ -11,6 +11,8 @@ Live demo: https://credlens.vercel.app/
 ![Results summary](./public/image2.png)
 - Screenshot 3: Share page
 ![Share page](./public/image3.png)
+- Screenshot 4: Savings with Credex
+![Savings with Credex](./public/credex.png)
 
  
 ## Core Features

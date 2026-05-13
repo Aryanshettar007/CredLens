@@ -167,3 +167,30 @@
 
 **Blockers / what I'm stuck on:**
 - None! Project is 100% ready for launch.
+
+---
+
+## Day 7 — 2026-05-13
+
+**Hours worked:** 5
+
+**What I did:**
+- Fixed CI lint/build issues by switching the lint script to run `eslint .` and addressing type and hook warnings.
+- Reworked MongoDB connection so env validation happens only when a request calls `connectToDatabase()`, preventing build-time failures.
+- Updated the share flow to always use `/share/:id` and adjusted the high-savings CTA to a Credex consultation.
+- Implemented a templated AI summary fallback so users see a summary even if the Gemini API fails.
+- Expanded docs to meet requirements: added Mermaid + PNG diagram and scaling notes in ARCHITECTURE, rationale/iterations in PROMPTS, and deeper GTM/ECONOMICS/METRICS/LANDING_COPY.
+- Cleaned up README with screenshots, live URL, deploy steps, and decisions.
+
+**What I learned:**
+- The Next.js CLI in this version does not expose `next lint`, so calling it fails in CI.
+- Build-time env checks can break `next build` if done at module import time; they should be deferred to runtime usage.
+- Mermaid diagrams treat `[]` as syntax, so route labels should use `/share/:id` instead of `/share/[id]`.
+
+**Blockers / what I'm stuck on:**
+- User interview write-ups still need to be updated to match the required format.
+
+**Plan for tomorrow:**
+- Finalize USER_INTERVIEWS.md with real quotes and notes.
+- Ensure PRICING_DATA.md matches the required per-plan format with verified dates.
+- Re-run lint/tests and push final commits.
